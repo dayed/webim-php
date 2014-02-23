@@ -1,5 +1,5 @@
 {
-    "name": "WebIM/WebIM",
+    "name": "webim/webim",
     "type": "library",
     "description": "PHP WebIM library for NexTalk",
     "keywords": ["webim", "nextalk"],
@@ -10,7 +10,7 @@
     },
     "autoload": {
         "psr-0": {
-            "WebIM": "WebIM"
+            "WebIM": "src/"
         }
     },
     "authors": [
