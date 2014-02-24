@@ -1,6 +1,7 @@
 {
-    "name": "webim/webim",
+    "name": "webim/webim-php",
     "type": "library",
+    "version": "5.4.0",
     "description": "PHP WebIM library for NexTalk",
     "keywords": ["webim", "nextalk"],
     "homepage": "http://github.com/webim/webim-php-composer",
