@@ -10,7 +10,7 @@ composer.json file.  Composer will handle the autoloading.
 ```json
 {
     "require": {
-        "WebIM/WebIM": "*"
+        "webim/webim-php": "*"
     }
 }
 ```
