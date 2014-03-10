@@ -33,8 +33,19 @@ class WebIM {
     const ERROR_INTERNAL_SERVER_ERROR = 500;
     const ERROR_SERVICE_UNAVAILABLE = 503;
 
+    /**
+     * WebIM router endpoint
+     */
     private $endpoint;
+
+    /**
+     * Domain 
+     */
     private $domain;
+
+    /**
+     * APIKEY
+     */
     private $apikey;
     private $ticket;
     private $server;
@@ -140,7 +151,7 @@ class WebIM {
      *
      * @param $ids
      *
-     * @return object
+     * @return {'uid1': 'available', 'uid2': 'away', ...}
      */
     public function presences($ids) {
         if(is_array($ids)) $ids =  implode(",", $ids);
