@@ -43,3 +43,8 @@ To test the library itself, run the PHPUnit tests:
 
     phpunit tests/
 
+## Author
+
+http://nextalk.im
+
+ery.lee at gmail.com
