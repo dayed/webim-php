@@ -4,7 +4,7 @@
  * Some simple unit tests to help test this library.
  */
 
-require_once dirname(__FILE__).'/../WebIM/WebIM.php';
+require_once dirname(__FILE__).'/../src/WebIM/WebIM.php';
 //require_once 'PHPUnit/Framework.php';
 
 class WebIMTest extends PHPUnit_Framework_TestCase {
