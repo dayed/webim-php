@@ -113,7 +113,7 @@ class WebIM {
         if(isset($response->mqttd)) $connection['mqttd'] = $response->mqttd;
         return (object)array(
             "success" => true, 
-            "buddies" => $response->buddies, 
+            "presences" => $response->presences, 
             "groups" => $response->groups,
             "connection" => (object)$connection
         );
