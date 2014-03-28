@@ -82,7 +82,7 @@ class WebIM {
 	 * 	-connection:
 	 * 	-endpint:
 	 * 	-buddies: [&buddyInfo]
-	 * 	-groupss: [&groupInfo]
+	 * 	-groups: [&groupInfo]
 	 * 	-error_msg:
 	 *
 	 */
@@ -104,8 +104,6 @@ class WebIM {
             "domain" => $this->domain,
             "server" => $response->jsonpd,
             "jsonpd" => $response->jsonpd,
-            "websocket" => $response->websocket,
-            "mqttd" => $response->mqttd,
         );
         //if websocket 
         if(isset($response->websocket)) $connection['websocket'] = $response->websocket;
@@ -113,9 +111,8 @@ class WebIM {
         if(isset($response->mqttd)) $connection['mqttd'] = $response->mqttd;
         return (object)array(
             "success" => true, 
-            "presences" => $response->presences, 
-            "groups" => $response->groups,
-            "connection" => (object)$connection
+            "connection" => (object)$connection,
+            "presences" => $response->presences 
         );
 	}
     
