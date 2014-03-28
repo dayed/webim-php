@@ -250,6 +250,7 @@ class WebIM {
 
         //curl request
         $ch = curl_init($url);
+        curl_setopt($ch, CURLOPT_USERPWD, "{$this->domain}:{$this->apikey}");
         curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($ch, CURLOPT_TIMEOUT, $this->timeout);
@@ -290,7 +291,8 @@ class WebIM {
     protected function reqdata() {
         $data = array(
 			'domain' => $this->domain, 
-			'apikey' => $this->apikey, 
+            //basic authentication
+			//'apikey' => $this->apikey, 
 			'version' => $this->version,
         );
         if($this->ticket) $data['ticket'] = $this->ticket;

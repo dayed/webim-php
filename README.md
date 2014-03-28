@@ -1,6 +1,8 @@
-# WebIM-php-composer
+# WebIM-PHP-Composer
 
 A PHP library for interacting with the [NexTalk](http://nextalk.im) Server.
+
+NexTalk is a web-based instant messaging server.
 
 ## Composer Installation
 
