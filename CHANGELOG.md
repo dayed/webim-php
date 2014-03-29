@@ -4,6 +4,8 @@
 
 * curl to replace http_client.php 
 * /presences/online api changed
-* /groups/:gid/members api changed
+* /rooms/:id/members api changed
+* /rooms/:id/join 
+* /rooms/:id/leave
 
 

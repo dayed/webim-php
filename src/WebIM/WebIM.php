@@ -75,22 +75,19 @@ class WebIM {
 	 * Online
 	 *
 	 * @param string $buddy_ids
-	 * @param string $group_ids
+	 * @param string $room_ids
 	 *
 	 * @return object
 	 * 	-success: true
 	 * 	-connection:
-	 * 	-endpint:
-	 * 	-buddies: [&buddyInfo]
-	 * 	-groups: [&groupInfo]
-	 * 	-error_msg:
+     *  -presences: {'uid1': 'available', 'uid2': 'away', ...}
 	 *
 	 */
-	public function online($buddy_ids, $group_ids) {
+	public function online($buddy_ids, $room_ids) {
         if(is_array($buddy_ids)) $buddy_ids = implode(',', $buddy_ids);
-        if(is_array($group_ids)) $group_ids = implode(',', $group_ids);
+        if(is_array($room_ids)) $room_ids = implode(',', $room_ids);
 		$data = array_merge($this->reqdata(), array(
-			'groups'=> $group_ids, 
+			'rooms'=> $room_ids, 
 			'buddies'=> $buddy_ids, 
 			'name'=> $this->endpoint->id, 
 			'nick'=> $this->endpoint->nick, 
@@ -184,7 +181,7 @@ class WebIM {
 	 * @param string $body message
 	 * @param string $style css
 	 *
-	 * @return ok
+	 * @return 'ok'
 	 *
 	 */
 	public function message($from, $to, $body, $type = 'chat', $style='', $timestamp = null) {
@@ -203,37 +200,41 @@ class WebIM {
 
     
 	/**
-	 * Get group members.
+	 * Get room members.
 	 *
-	 * @param string $gid
+	 * @param string $roomId
 	 *
-	 * @return array $members
+     * @return {'uid1': 'available', 'uid2': 'away', ...}
 	 *
 	 */
-    public function members($gid) {
-		return $this->request("groups/{$gid}/members", $this->reqdata());
+    public function members($roomId) {
+		return $this->request("rooms/{$roomId}/members", $this->reqdata());
     }
 
     /**
-     * Join group
+     * Join Room
      * 
-     * @return 
+	 * @param string $roomId
+     *
+     * @return 'ok'
      */
-	public function join($gid){
+	public function join($roomId){
 		$data = $this->reqdata();
         $data['nick'] = $this->endpoint->nick; 
-		return $this->request("groups/{$gid}/join", $data, 'POST');
+		return $this->request("rooms/{$roomId}/join", $data, 'POST');
 	}
 
     /**
-     * Leave Group
+     * Leave Room
      *
-     * @return TODO:
+	 * @param string $roomId
+     *
+     * @return 'ok'
      */
-    public function leave($gid) {
+    public function leave($roomId) {
 		$data = $this->reqdata();
         $data['nick'] = $this->endpoint->nick; 
-		return $this->request("groups/{$gid}/leave", $data,'POST');
+		return $this->request("rooms/{$roomId}/leave", $data,'POST');
     }
 
     /**
