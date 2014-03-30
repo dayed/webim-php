@@ -31,9 +31,6 @@ class WebIMTest extends PHPUnit_Framework_TestCase {
         $this->dump('Online', $this->webim->online(['uid4', 'uid5'], ['room6', 'room7']));
     }
 
-    public function testShow() {
-        $this->dump('Show', $this->webim->show('away', 'Away'));
-    }
 
     public function testOffline() {
         $this->dump('Offline', $this->webim->offline()); 
@@ -41,6 +38,10 @@ class WebIMTest extends PHPUnit_Framework_TestCase {
 
     public function testPresences() {
         $this->dump('Presences', $this->webim->presences(['uid1', 'uid2', 'uid3']));
+    }
+
+    public function testPresence() {
+        $this->dump('Presence', $this->webim->presence('away', 'Away'));
     }
 
     public function testStatus() {

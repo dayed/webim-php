@@ -114,23 +114,6 @@ class WebIM {
 	}
     
 	/**
-	 * Show
-	 *
-	 * @param string $show
-	 * @param string $status
-	 *
-	 * @return ok
-	 *
-	 */
-	function show($show, $status = null){
-        $data = $this->reqdata();
-        $data['nick'] = $this->endpoint->nick;
-        $data['show'] = $show;
-        if($status) $data['status'] = $status;
-		return $this->request('presences/show', $data, 'POST');
-	}
-
-	/**
 	 * Offline
 	 *
 	 * @return {'status': 'ok'}
@@ -153,6 +136,25 @@ class WebIM {
         $data['ids'] = $ids;
         return $this->request('presences', $data);
     }
+
+	/**
+	 * Send presence.
+	 *
+     * @param string 
+     *      $show: 'available' | 'away' | 'chat' | 'dnd' | 'invisible' | 'unavailable'
+	 * @param string $status
+	 *
+	 * @return ok
+	 *
+	 */
+	function presence($show, $status = null){
+        $data = $this->reqdata();
+        $data['nick'] = $this->endpoint->nick;
+        $data['show'] = $show;
+        if($status) $data['status'] = $status;
+		return $this->request('presences/show', $data, 'POST');
+	}
+
 
 	/**
 	 * Send endpoint chat status to other.
