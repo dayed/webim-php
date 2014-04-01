@@ -1,4 +1,4 @@
-# WebIM-PHP-Composer
+# WebIM-PHP
 
 A PHP library for interacting with the [NexTalk](http://nextalk.im) Server.
 
