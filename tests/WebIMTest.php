@@ -23,50 +23,50 @@ class WebIMTest extends PHPUnit_Framework_TestCase {
             'show' => 'available',
             'status' => 'online',
         );
-        $this->webim = new \WebIM\Client($endpoint, $domain, $apikey, $server);
-        $this->webim->online($buddies, $rooms);
+        $this->client = new \WebIM\Client($endpoint, $domain, $apikey, $server);
+        $this->client->online($buddies, $rooms);
     }
 
     public function testOnline() {
-        $this->dump('Online', $this->webim->online(['uid4', 'uid5'], ['room6', 'room7']));
+        $this->dump('Online', $this->client->online(['uid4', 'uid5'], ['room6', 'room7']));
     }
 
 
     public function testOffline() {
-        $this->dump('Offline', $this->webim->offline()); 
+        $this->dump('Offline', $this->client->offline()); 
     }
 
     public function testPresences() {
-        $this->dump('Presences', $this->webim->presences(['uid1', 'uid2', 'uid3']));
+        $this->dump('Presences', $this->client->presences(['uid1', 'uid2', 'uid3']));
     }
 
     public function testPresence() {
-        $this->dump('Presence', $this->webim->presence('away', 'Away'));
+        $this->dump('Presence', $this->client->presence('away', 'Away'));
     }
 
     public function testStatus() {
-        $this->dump('Send Status', $this->webim->status('uid2', 'typing'));
+        $this->dump('Send Status', $this->client->status('uid2', 'typing'));
     }
 
     public function testMessage() {
-        $this->dump('Send Message', $this->webim->message(null, 'uid2', 'blabla'));
+        $this->dump('Send Message', $this->client->message(null, 'uid2', 'blabla'));
     }
 
     public function testPush() {
-        $this->dump('Push Message', $this->webim->message('uid1', 'uid2', 'blabla'));
+        $this->dump('Push Message', $this->client->message('uid1', 'uid2', 'blabla'));
     }
 
     public function testMembers() {
-        $this->dump('Members', $this->webim->members('room1'));
+        $this->dump('Members', $this->client->members('room1'));
     }
 
     public function testJoin() {
-        $this->dump('Join', $this->webim->join('room3'));
+        $this->dump('Join', $this->client->join('room3'));
     }
 
     public function testLeave() {
-        $this->webim->join('room3');
-        $this->dump('Leave', $this->webim->leave('room3'));
+        $this->client->join('room3');
+        $this->dump('Leave', $this->client->leave('room3'));
     }
 
     private function dump($title, $data) {
