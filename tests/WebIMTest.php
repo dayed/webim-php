@@ -4,7 +4,7 @@
  * Some simple unit tests to help test this library.
  */
 
-require_once dirname(__FILE__).'/../src/WebIM/WebIM.php';
+require_once dirname(__FILE__).'/../src/WebIM/Client.php';
 //require_once 'PHPUnit/Framework.php';
 
 class WebIMTest extends PHPUnit_Framework_TestCase {
@@ -14,7 +14,7 @@ class WebIMTest extends PHPUnit_Framework_TestCase {
     protected function setUp() {
         $domain   = 'localhost';
         $apikey   = 'public';
-        $server   = 'http://localhost:8000';
+        $server   = 'http://t.nextalk.im:8000';
         $buddies  = ['uid2', 'uid3'];
         $rooms    = ['room1', 'room2'];
         $endpoint = array(
@@ -23,7 +23,7 @@ class WebIMTest extends PHPUnit_Framework_TestCase {
             'show' => 'available',
             'status' => 'online',
         );
-        $this->webim = new \WebIM\WebIM($endpoint, $domain, $apikey, $server);
+        $this->webim = new \WebIM\Client($endpoint, $domain, $apikey, $server);
         $this->webim->online($buddies, $rooms);
     }
 

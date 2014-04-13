@@ -7,7 +7,7 @@ namespace WebIM;
  *
  * @see http://nextalk.im/docs/api
  */
-class WebIM {
+class Client {
 
     /**
     * Version
@@ -17,7 +17,7 @@ class WebIM {
     /**
      * Server
      */
-    const SERVER = 'http://nextalk.im:8000';
+    const SERVER = 'http://t.nextalk.im:8000';
 
     const TIMEOUT = 15;
 
@@ -47,7 +47,15 @@ class WebIM {
      * APIKEY
      */
     private $apikey;
+
+    /**
+     * Ticket
+     */
     private $ticket;
+
+    /**
+     * NexTalk Server
+     */
     private $server;
     private $version;
     private $timeout;
@@ -83,16 +91,19 @@ class WebIM {
      *  -presences: {'uid1': 'available', 'uid2': 'away', ...}
 	 *
 	 */
-	public function online($buddy_ids, $room_ids) {
+	public function online($buddy_ids, $room_ids, $show = null) {
         if(is_array($buddy_ids)) $buddy_ids = implode(',', $buddy_ids);
         if(is_array($room_ids)) $room_ids = implode(',', $room_ids);
+        if( !$show ) $show = $this->endpoint->show;
+        $endpoint = $this->endpoint;
+        $status = isset($endpoint->status) ?  $endpoint->status : '';
 		$data = array_merge($this->reqdata(), array(
 			'rooms'=> $room_ids, 
 			'buddies'=> $buddy_ids, 
-			'name'=> $this->endpoint->id, 
-			'nick'=> $this->endpoint->nick, 
-			'status'=> $this->endpoint->status, 
-			'show' => $this->endpoint->show
+			'name'=> $endpoint->id, 
+			'nick'=> $endpoint->nick, 
+			'status'=> $status, 
+			'show' => $show
 		));
 		$response = $this->request('presences/online', $data, 'POST');
         $this->ticket = $response->ticket;
@@ -187,7 +198,7 @@ class WebIM {
 	 *
 	 */
 	public function message($from, $to, $body, $type = 'chat', $style='', $timestamp = null) {
-        if(!$timestamp) $timestamp = $this->microtimeFloat() * 1000;
+        if(!$timestamp) $timestamp = microtime(true) * 1000;
 		$data = array_merge($this->reqdata(), array(
 			'nick' => $this->endpoint->nick,
 			'to' => $to,
@@ -247,14 +258,12 @@ class WebIM {
         if($method == 'GET') {
             $url .= '?'.http_build_query($data);
         }
-
         //curl request
         $ch = curl_init($url);
         curl_setopt($ch, CURLOPT_USERPWD, "{$this->domain}:{$this->apikey}");
         curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($ch, CURLOPT_TIMEOUT, $this->timeout);
-        //curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, $this->verify_ssl);
         if($method == 'POST') {
             //$data = array_map(array($this, "sanitize_curl_parameter"), $data);
             curl_setopt($ch, CURLOPT_POST, 1);
@@ -271,7 +280,7 @@ class WebIM {
 
         $code = (int)curl_getinfo($ch, CURLINFO_HTTP_CODE);
         if ($code != self::STATUS_OK) {
-          throw new WebIMException($code, $url, "HTTP status code: $code, response=$response");
+            throw new WebIMException($code, $url, "HTTP status code: $code, response=$response");
         }
 
         curl_close($ch);
@@ -299,10 +308,6 @@ class WebIM {
         return $data;
     }
 
-    private function microtimeFloat() {
-        list($usec, $sec) = explode(" ", microtime());
-        return ((float)$usec + (float)$sec);
-    }
 
 }
 
