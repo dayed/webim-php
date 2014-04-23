@@ -5,7 +5,7 @@ namespace WebIM;
 /**
  * PHP WebIM Library for interacting with NexTalk server.
  *
- * @see http://nextalk.im/docs/api
+ * @see https://github.com/webim/webim-php
  */
 class Client {
 
@@ -307,7 +307,6 @@ class Client {
         if($this->ticket) $data['ticket'] = $this->ticket;
         return $data;
     }
-
 
 }
 

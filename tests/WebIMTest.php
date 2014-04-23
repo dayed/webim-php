@@ -14,7 +14,7 @@ class WebIMTest extends PHPUnit_Framework_TestCase {
     protected function setUp() {
         $domain   = 'localhost';
         $apikey   = 'public';
-        $server   = 'http://t.nextalk.im:8000';
+        $server   = 't.nextalk.im:8000';
         $buddies  = ['uid2', 'uid3'];
         $rooms    = ['room1', 'room2'];
         $endpoint = array(
