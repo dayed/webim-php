@@ -1,4 +1,10 @@
 
+5.5 (2014/06/20)
+--------------------
+
+* support clustered servers
+
+
 5.4.1 (2014/04/12)
 --------------------
 * online api add 'show' param
